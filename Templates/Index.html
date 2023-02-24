@@ -1,0 +1,103 @@
+{% extends 'Basic.html' %}
+
+{% block title %} TextUtils.in {% endblock title %}
+
+{% block homeactive %}  active {% endblock homeactive %}
+
+{% block body %} 
+
+<div class="alert alert-{{tag}} alert-dismissible fade show" id="messageofvalidate" role="alert">
+    <strong>{{strongtext}}</strong> {{text}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="container my-4" style="height:85vh;">
+    
+    <form action="/analyzer" onsubmit="return validate()" method="post"> {% csrf_token %}
+
+      <div class="form-group">
+      <h3><span id="typed"></span></h3>
+      <textarea class="form-control" name='text' id="exampleFormControlTextarea1" rows="9"></textarea>
+        
+      <!-- Word Counter -->
+      <p class="my-2">
+      <span id="wordCount">0</span> Characters
+      <script type="text/javascript">
+        var exampleFormControlTextarea1 = document.getElementById("exampleFormControlTextarea1");
+        var wordCount = document.getElementById("wordCount");
+    
+        exampleFormControlTextarea1.addEventListener("keyup",function(){
+        var characters = exampleFormControlTextarea1.value.split('');
+          wordCount.innerText = characters.length;
+        });
+      </script>
+      </p>
+      </div>
+
+        <div class="custom-control custom-switch">
+            <input name="removepunc" type="checkbox" class="custom-control-input" id="customSwitch1">
+            <label class="custom-control-label" for="customSwitch1">Remove Punctuations</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+            <input name="fullcaps" type="checkbox" class="custom-control-input" id="customSwitch2">
+            <label class="custom-control-label" for="customSwitch2">UPPERCASE</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+            <input name="newlineremover" type="checkbox" class="custom-control-input" id="customSwitch3">
+            <label class="custom-control-label" for="customSwitch3">New Line Remover</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+            <input name="extraspaceremover" type="checkbox" class="custom-control-input" id="customSwitch4">
+            <label class="custom-control-label" for="customSwitch4">Extra Space Remover</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+            <input name="numberremover" type="checkbox" class="custom-control-input" id="customSwitch5">
+            <label class="custom-control-label" for="customSwitch5">Number Remover</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary my-3">Analyze Text</button>
+
+      </form>
+
+  </div>
+
+
+  <!-- Typed.js DONT TOUCH THIS! --> 
+     <div id="typed-strings">
+       </div>
+       
+  <script>
+    var typed = new Typed('#typed',{
+                   strings:["You can do anything with your text here!","Enter your text here and let Text Utils do the magic!"],
+                   backSpeed: 15,
+                   smartBackspace: true,
+                   backDelay: 1200,
+                   startDelay: 1000,
+                   typeSpeed: 25,
+                   loop: false,
+
+                 });
+   </script>
+
+   
+  
+<script>
+    function validate(){
+        var textarea = document.getElementById('exampleFormControlTextarea1').value;
+        var span = document.getElementById('messageofvalidate');
+        
+        if (textarea == '') {
+            span.innerHTML = 'Please Write Your Message';
+            return false;
+        }
+        
+    }
+</script>
+
+{% endblock body %}
