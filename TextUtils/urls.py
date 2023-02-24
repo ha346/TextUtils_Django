@@ -25,6 +25,6 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('submitcontact', views.submitContact, name='submitcontact'),
 ]
-
+ 
 # Username: ha346
 # Password: 12345

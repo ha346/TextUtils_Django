@@ -48,7 +48,7 @@ def analyzer(request):
 
     if (newlineremover == "on"):
         analyzed = ""
-        for char in djtext:
+        for char in djtext: 
             if char != "\n" and char!="\r":
                 analyzed = analyzed + char
 
